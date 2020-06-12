@@ -1,27 +1,15 @@
 var express = require("express");
-var exphbs = require("express-handlebars");
-//logs all of our request
-var logger = require("morgan");
+var handlebars = require("express-handlebars");
 var mongoose = require("mongoose");
-
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
-var axios = require("axios");
-var cheerio = require("cheerio");
+// Requiring all models
+var db = require("./models");
 
 //setting the PORT
 var PORT = 3000;
 
-// Requiring all models
-var db = require("./models");
-
 // Initializing Express
 var app = express();
 
-// Configure middleware
-// Use morgan logger for logging requests
-app.use(logger("dev"));
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -29,10 +17,16 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //set up handlebars
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", handlebars({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // If deployed, use the deployed database. Otherwise use my localhost mongoDB I named
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines1";
 
+require("./routes/routes")(app);
 mongoose.connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true });
+
+// Start the server
+app.listen(PORT, function() {
+    console.log("App running on port " + PORT + "!");
+  });
