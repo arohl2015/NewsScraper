@@ -1,0 +1,29 @@
+{
+  "name": "newsscraper",
+  "version": "1.0.0",
+  "description": "Mongo scraper for any website",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arohl2015/NewsScraper.git"
+  },
+  "keywords": [],
+  "author": "April Rohl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arohl2015/NewsScraper/issues"
+  },
+  "homepage": "https://github.com/arohl2015/NewsScraper#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "mongoose": "^5.9.18",
+    "morgan": "^1.10.0"
+  }
+}
