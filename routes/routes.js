@@ -35,7 +35,7 @@ module.exports = function (app) {
                     });
                 };
             });
-            response.redirect('/');
+            // response.redirect('/');
         }).catch(function (err) {
             console.log(err);
             res.send("Error: Unable to obtain new articles");
@@ -44,7 +44,7 @@ module.exports = function (app) {
 
     // home route
     app.get("/", function(req, res) {
-        db.Article.find({})
+        db.Article.find({}).lean()
             .then(function (dbArticle) {
                 // If we were able to successfully find Articles, send them back to the client
                 var retrievedArticles = dbArticle;
