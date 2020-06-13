@@ -5,12 +5,12 @@
 // It works on the client and on the server
 var axios = require("axios");
 var cheerio = require("cheerio");
-const db = require("../models")
+var db = require("../models")
 
 module.exports = function (app) {
     app.get("/scrape", function (req, response) {
         // First, we grab the body of the html with axios
-        axios.get("https://www.buzzfeed.com/").then(function (response) {
+        axios.get("https://www.buzzfeed.com/").then(function(response) {
             // Then, we load that into cheerio and save it to $ for a shorthand selector
             var $ = cheerio.load(response.data);
             var count = 0;
@@ -22,7 +22,8 @@ module.exports = function (app) {
                 // Add the text and href of every link, and save them as properties of the result object
                 result.title = $(this)
                     .children("a")
-                    .text();
+                    .text()
+                    .trim();
                 result.link = $(this)
                     .children("a")
                     .attr("href");
@@ -137,9 +138,6 @@ app.put("/remove/:id", function (req, res) {
     // Create a new note and pass the req.body to the entry
     db.Note.create(req.body)
       .then(function (dbNote) {
-        // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
-        // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
-        // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
         return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { note: dbNote._id } }, { new: true });
       })
       .then(function (dbArticle) {
