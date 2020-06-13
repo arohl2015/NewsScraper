@@ -23,7 +23,7 @@ $ git clone git@github.com:arohl2015/NewsScraper.git
 Next, cd into the repository and run the command
 ```
 npm install
-
+```
 ## Heroku Deployment
 
 * Please go to the following link: `https://blooming-temple-08285.herokuapp.com/` 
@@ -40,11 +40,15 @@ npm install
 ## Technologies Used:
 -   HTML
 -   CSS
+-   Bootstrap
 -	Javascript
 -	Node.js
 -	NPM packages:
     -	Express
-    -   
+    -   Express-Handlebars
+    -   Axios
+    -   Cheerio
+    -   Mongoose
 -   Heroku
 -   GitHub
 
