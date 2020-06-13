@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(".delete-btn").click(function (event) {
       event.preventDefault();
       var id = $(this).attr("data");
-      $.ajax("/remove/${id}", {
+      $.ajax(`/remove/${id}`, {
         type: "PUT"
       }).then(function () {
         location.reload();
@@ -16,7 +16,7 @@ $(document).ready(function () {
       var id = $(this).attr("data");
       $("#article-id").text(id);
       $("#save-note").attr("data", id);
-      $.ajax("/articles/${id}", {
+      $.ajax(`/articles/${id}`, {
         type: "GET"
       }).then(function (data) {
         console.log(data)
@@ -39,7 +39,7 @@ $(document).ready(function () {
       console.log($(this).attr("data"))
       const id = $(this).attr("data");
       console.log(id);
-      $.ajax("/note/${id}", {
+      $.ajax(`/note/${id}`, {
         type: "DELETE"
       }).then(function () {
         $("#note-modal").modal("toggle");
@@ -51,7 +51,7 @@ $(document).ready(function () {
       const id = $(this).attr("data");
       const noteText = $("#note-input").val().trim();
       $("#note-input").val('');
-      $.ajax("/note/${id}", {
+      $.ajax(`/note/${id}`, {
         type: "POST",
         data: { text: noteText }
       }).then(function (data) {
@@ -64,7 +64,8 @@ $(document).ready(function () {
       event.preventDefault();
       const button = $(this);
       const id = button.attr("id");
-      $.ajax("/save/${id}", {
+      console.log(event);
+      $.ajax(`/save/${id}`, {
         type: "PUT"
       }).then(function () {
         const alert = `

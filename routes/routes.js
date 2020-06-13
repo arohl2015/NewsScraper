@@ -35,10 +35,10 @@ module.exports = function (app) {
                     });
                 };
             });
-            // response.redirect('/');
+            // if statement to limit # of article responses
         }).catch(function (err) {
             console.log(err);
-            res.send("Error: Unable to obtain new articles");
+            res.send("Error: no new articles");
         });
     });
 
@@ -61,8 +61,9 @@ module.exports = function (app) {
     });
 //route to see all saved articles
     app.get("/saved", function(req, res){
-        db.Article.find({ isSaved: true })
+        db.Article.find({ saved: true })
           .then(function (retrievedArticles) {
+            console.log(JSON.stringify(retrievedArticles))
             // If we were able to successfully find Articles, send them back to the client
             var hbsObject;
             hbsObject = {
@@ -91,8 +92,9 @@ app.get("/articles", function (req, res) {
 
 //route to save article
 app.put("/save/:id", function (req, res) {
-    db.Article.findOneAndUpdate({ _id: req.params.id }, { isSaved: true })
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true })
       .then(function (data) {
+        console.log(data)
         // If we were able to successfully find Articles, send them back to the client
         res.json(data);
       })
@@ -104,7 +106,7 @@ app.put("/save/:id", function (req, res) {
 
 //route to remove saved option
 app.put("/remove/:id", function (req, res) {
-    db.Article.findOneAndUpdate({ _id: req.params.id }, { isSaved: false })
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: false })
       .then(function (data) {
         // If we were able to successfully find Articles, send them back to the client
         res.json(data)

@@ -10,7 +10,7 @@
       <a class="nav-item nav-link active" href="/saved">Saved Articles
         <span class="sr-only">(current)</span>
       </a>
-      <button href="/saved" type="button" class="btn btn-warning" id="scrape">Scrape Articles</button>
+      <button href="/scrape" type="button" class="btn btn-warning" id="scrape">Scrape Articles</button>
     </div>
   </div>
 </nav>
@@ -28,7 +28,7 @@
       {{#each articles}}
       <div class="card w-90">
         <div class="card-header text-white bg-warning">
-          <a href={{link}} target="_blank" class="text-white">
+         <a href={{#if link}}{{link}}{{else}}""{{/if}} target="_blank" class="text-white">
             <h2>{{title}}</h2>
           </a>
         </div>
