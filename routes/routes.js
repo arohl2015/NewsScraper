@@ -8,7 +8,7 @@ var cheerio = require("cheerio");
 const db = require("../models")
 
 module.exports = function (app) {
-    app.get("/scrape", function (req, response, next) {
+    app.get("/scrape", function (req, response) {
         // First, we grab the body of the html with axios
         axios.get("https://www.buzzfeed.com/").then(function (response) {
             // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -19,7 +19,6 @@ module.exports = function (app) {
                 // Save an empty result object
                 var result = {};
                 var count = i;
-
                 // Add the text and href of every link, and save them as properties of the result object
                 result.title = $(this)
                     .children("a")
@@ -29,7 +28,8 @@ module.exports = function (app) {
                     .attr("href");
                 if (result.title && result.link) {
                     db.Article.create(result).then(function (dbArticle) {
-                        count++;
+                      console.log(dbArticle);  
+                      count++;
                     }).catch(function (err) {
                         console.log(err);
                     });
@@ -78,7 +78,7 @@ module.exports = function (app) {
 // route to get all Articles from the db
 app.get("/articles", function (req, res) {
     // Grab every document in the Articles collection
-    db.Article.find({})
+    db.Article.find({}).lean()
       .then(function (dbArticle) {
         // If we were able to successfully find Articles, send them back to the client
         res.json(dbArticle);
@@ -156,8 +156,7 @@ app.put("/remove/:id", function (req, res) {
     // Create a new note and pass the req.body to the entry
     db.Note.findByIdAndRemove({ _id: req.params.id })
       .then(function (dbNote) {
-
-        return db.Article.findOneAndUpdate({ note: req.params.id }, { $pullAll: [{ note: req.params.id }] });
+      return db.Article.findOneAndUpdate({ note: req.params.id }, { $pullAll: [{ note: req.params.id }] });
       })
       .then(function (dbArticle) {
         // If we were able to successfully update an Article, send it back to the client
