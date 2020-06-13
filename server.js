@@ -4,7 +4,7 @@ var mongoose = require("mongoose");
 // Requiring all models
 var db = require("./models");
 
-//setting the PORT
+//setting the PORT - had to change to model below to deploy to Heroku
 const PORT = process.env.PORT || 3000;
 // If deployed, use the deployed database. Otherwise use my localhost mongoDB I named
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines1";

@@ -22,14 +22,13 @@ module.exports = function (app) {
                 // Add the text and href of every link, and save them as properties of the result object
                 result.title = $(this)
                     .children("a")
-                    .text()
-                    .trim();
+                    .text();
                 result.link = $(this)
                     .children("a")
                     .attr("href");
                 if (result.title && result.link) {
                     db.Article.create(result).then(function (dbArticle) {
-                      console.log(dbArticle);  
+                      console.log(dbArticle); 
                       count++;
                     }).catch(function (err) {
                         console.log(err);
