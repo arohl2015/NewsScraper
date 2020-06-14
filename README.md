@@ -63,6 +63,7 @@ npm install
 In the future, I'd like to convert this type of web scraping application to React and use a different website to scrape data from to more easily display additional fields outside of just a link and article title.
 ###### Please Note:
 I had some issues with rendering my data on the webpage. My articles scrape, but they don't update (you can see them in the terminal if you run the application locally) and I was having problems with saving notes and deleting articles. You can view a video of some of my issues below:
+
 ​![Mongo Scraper1](public/assets/images/scraper.gif)
 
 ## Connect with Me & View my Work:
