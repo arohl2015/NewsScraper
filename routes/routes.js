@@ -34,8 +34,8 @@ module.exports = function (app) {
                         console.log(err);
                     });
                 };
-            });
-            // if statement to limit # of article responses
+            })
+            .limit(50);
         }).catch(function (err) {
             console.log(err);
             res.send("Error: no new articles");
@@ -44,7 +44,7 @@ module.exports = function (app) {
 
     // home route
     app.get("/", function(req, res) {
-        db.Article.find({}).lean()
+        db.Article.find({}).limit(50).lean()
             .then(function (dbArticle) {
                 // If we were able to successfully find Articles, send them back to the client
                 var retrievedArticles = dbArticle;
