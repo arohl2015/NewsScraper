@@ -51,8 +51,8 @@ $(document).ready(function () {
   
     $("#save-note").click(function (event) {
       event.preventDefault();
-      const id = $(this).attr("data");
-      const noteText = $("#note-input").val().trim();
+      var id = $(this).attr("data");
+      var noteText = $("#note-input").val().trim();
       $("#note-input").val('');
       $.ajax(`/note/${id}`, {
         type: "POST",
@@ -83,3 +83,5 @@ $(document).ready(function () {
       );
     });
   });
+
+  

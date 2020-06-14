@@ -18,7 +18,6 @@ module.exports = function (app) {
             $("article h2").each(function (i, element) {
                 // Save an empty result object
                 var result = {};
-                var count = i;
                 // Add the text and href of every link, and save them as properties of the result object
                 result.title = $(this)
                     .children("a")
@@ -26,14 +25,12 @@ module.exports = function (app) {
                 result.link = $(this)
                     .children("a")
                     .attr("href");
-                if (result.title && result.link) {
+                // if (result.title && result.link) {
                     db.Article.create(result).then(function (dbArticle) {
                       console.log(dbArticle); 
-                      count++;
                     }).catch(function (err) {
                         console.log(err);
                     });
-                };
             })
             .limit(50);
         }).catch(function (err) {
@@ -104,26 +101,24 @@ app.put("/save/:id", function (req, res) {
       });
   });
 
-//route to remove saved option
-app.put("/remove/:id", function (req, res) {
-    db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: false })
-      .then(function (data) {
-        // If we were able to successfully find Articles, send them back to the client
-        res.json(data)
-      })
-      .catch(function (err) {
-        // If an error occurred, send it to the client
-        res.json(err);
-      });
-  });
+// //route to remove saved option
+// app.put("/remove/:id", function (req, res) {
+//     db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: false })
+//       .then(function (data) {
+//         // If we were able to successfully find Articles, send them back to the client
+//         res.json(data)
+//       })
+//       .catch(function (err) {
+//         // If an error occurred, send it to the client
+//         res.json(err);
+//       });
+//   });
+
   app.get("/articles/:id", function (req, res) {
     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-    db.Article.find({ _id: req.params.id })
+    db.Article.findOne({ _id: req.params.id })
       // ..and populate all of the notes associated with it
-      .populate({
-        path: "note",
-        model: "Note"
-      })
+      .populate("note")
       .then(function (dbArticle) {
         // If we were able to successfully find an Article with the given id, send it back to the client
         res.json(dbArticle);
@@ -135,7 +130,7 @@ app.put("/remove/:id", function (req, res) {
   });
 
   // Route for saving/updating an Article's associated Note
-  app.post("/note/:id", function (req, res) {
+  app.post("/articles/:id", function (req, res) {
     // Create a new note and pass the req.body to the entry
     db.Note.create(req.body)
       .then(function (dbNote) {
@@ -151,12 +146,9 @@ app.put("/remove/:id", function (req, res) {
       });
   });
 
-  app.delete("/note/:id", function (req, res) {
+  app.get("/delete/:id", function (req, res) {
     // Create a new note and pass the req.body to the entry
-    db.Note.findByIdAndRemove({ _id: req.params.id })
-      .then(function (dbNote) {
-      return db.Article.findOneAndUpdate({ note: req.params.id }, { $pullAll: [{ note: req.params.id }] });
-      })
+    db.Article.findByIdAndRemove({ _id: req.params.id })
       .then(function (dbArticle) {
         // If we were able to successfully update an Article, send it back to the client
         res.json(dbArticle);

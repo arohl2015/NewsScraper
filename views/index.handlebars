@@ -19,7 +19,7 @@
         <div class="overlay">
             <div class="caption">
                 <h1 class="display-1 text-white">Mongo Scraper</h1>
-                <h2 class="text-white">Buzzfeed</h2>
+                <h2 class="text-white">Buzzfeed News</h2>
             </div>
         </div>
     </div>
@@ -29,6 +29,7 @@
             {{#each articles}}
             <div class="card w-90">
                 <div class="card-header text-white bg-warning">
+                    {{!-- attempt to fix deprecation error --}}
                     <a href={{#if link}}{{link}}{{else}}""{{/if}} target="_blank" class="text-white">
                         <h2>{{title}}</h2>
                     </a>
