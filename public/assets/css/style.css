@@ -1,0 +1,13 @@
+.background-image{
+    background-image: url("../images/newspaperbg.jpg");
+  }
+
+.display-1 {
+    color: #8B0000;
+    font-weight: bolder;
+}
+
+.secondheader {
+    color: #8B0000;
+    font-weight: bold;
+}

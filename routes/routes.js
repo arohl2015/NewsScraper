@@ -13,7 +13,6 @@ module.exports = function (app) {
         axios.get("https://www.buzzfeed.com/").then(function(response) {
             // Then, we load that into cheerio and save it to $ for a shorthand selector
             var $ = cheerio.load(response.data);
-            var count = 0;
             // Now, we grab every h2 within an article tag, and do the following:
             $("article h2").each(function (i, element) {
                 // Save an empty result object
