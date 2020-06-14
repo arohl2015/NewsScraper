@@ -29,11 +29,11 @@ npm install
 * Please go to the following link: `https://blooming-temple-08285.herokuapp.com/` 
 
 ## App Examples:
-​![Mongo Scraper1](./assets/images/homepage.PNG)
+​![Mongo Scraper1](public/assets/images/homepage.PNG)
 
 ![Mongo Scraper2](public/assets/images/saved.PNG)
 
-![Mongo Scraper3](C:\Users\fairy\Desktop\Rohl-portfolio\NewsScraper\public\assets\images\savenotes.PNG)
+![Mongo Scraper3](public/assets/images/savenotes.PNG)
 
 ## Technologies Used:
 -   HTML
@@ -62,7 +62,8 @@ npm install
 ## Future Enhancements:
 In the future, I'd like to convert this type of web scraping application to React and use a different website to scrape data from to more easily display additional fields outside of just a link and article title.
 ###### Please Note:
-I had some issues with rendering my data on the webpage. My articles scrape, but they don't update (you can see them in the terminal if you run the application locally) and I was having problems with saving notes and deleting articles.
+I had some issues with rendering my data on the webpage. My articles scrape, but they don't update (you can see them in the terminal if you run the application locally) and I was having problems with saving notes and deleting articles. You can view a video of some of my issues below:
+​![Mongo Scraper1](public/assets/images/scraper.gif)
 
 ## Connect with Me & View my Work:
 - <a href="https://arohl2015.github.io/Updated-Portfolio/" target="_blank"> Portfolio </a>
