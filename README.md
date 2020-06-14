@@ -29,11 +29,11 @@ npm install
 * Please go to the following link: `https://blooming-temple-08285.herokuapp.com/` 
 
 ## App Examples:
-​![Mongo Scraper1](public/assets/img/homepage.PNG)
+​![Mongo Scraper1](/public/assets/img/homepage.PNG)
 
-![Mongo Scraper2](public/assets/img/saved.PNG)
+![Mongo Scraper2](/public/assets/img/saved.PNG)
 
-![Mongo Scraper3](public/assets/img/savenotes.PNG)
+![Mongo Scraper3](/public/assets/img/savenotes.PNG)
 
 ## Technologies Used:
 -   HTML
